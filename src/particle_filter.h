@@ -1,11 +1,3 @@
-/*
- * particle_filter.h
- *
- * 2D particle filter class.
- *  Created on: Dec 12, 2016
- *      Author: Tiffany Huang
- */
-
 #ifndef PARTICLE_FILTER_H_
 #define PARTICLE_FILTER_H_
 
@@ -26,12 +18,12 @@ struct Particle {
 
 
 class ParticleFilter {
-	
+
 	// Number of particles to draw
-	int num_particles; 
-	
-	
-	
+	int num_particles;
+
+
+
 	// Flag, if filter is initialized
 	bool is_initialized;
 	
@@ -44,7 +36,7 @@ public:
 	std::vector<Particle> particles;
 
 	// Constructor
-	// @param M Number of particles
+	// @param num_particles Number of particles
 	ParticleFilter() : num_particles(0), is_initialized(false) {}
 
 	// Destructor
@@ -84,13 +76,12 @@ public:
 	 * updateWeights Updates the weights for each particle based on the likelihood of the 
 	 *   observed measurements. 
 	 * @param sensor_range Range [m] of sensor
-	 * @param std_landmark[] Array of dimension 2 [standard deviation of range [m],
-	 *   standard deviation of bearing [rad]]
+	 * @param std_landmark[] Array of dimension 2 [Landmark measurement uncertainty [x [m], y [m]]]
 	 * @param observations Vector of landmark observations
 	 * @param map Map class containing map landmarks
 	 */
-	void updateWeights(double sensor_range, double std_landmark[], std::vector<LandmarkObs> observations,
-			Map map_landmarks);
+	void updateWeights(double sensor_range, double std_landmark[], const std::vector<LandmarkObs> &observations,
+			const Map &map_landmarks);
 	
 	/**
 	 * resample Resamples from the updated set of particles to form
